@@ -1,0 +1,41 @@
+body {
+ background-color: #000000;
+ padding: 2rem;
+}
+
+h1,
+h3 {
+	font-size: 3rem;
+	text-align: center;
+	font-family: Avenir;
+	color: #FFFFFF;
+	margin-bottom: 2rem;
+}
+
+h3 {
+	vertical-align: baseline;
+}
+
+button {
+	text-align: center;
+}
+
+.main-header { 
+ 	font-size: 5rem;
+ }
+
+
+.palette { 
+	height: 80vh;
+	display: flex;
+}
+
+section {
+	height: 100%;
+	width: 20%;
+}
+
+form { 
+	padding: 3rem;
+	text-align: center;
+}
