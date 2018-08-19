@@ -12,6 +12,7 @@ function getRandomColor() {
 };
 
 function generatePalette() {
+	var colors = []
 	for (var i = 0; i < 5; i++) {
 		 var color = getRandomColor();
 		 if (!isLocked(i)) {
@@ -19,6 +20,7 @@ function generatePalette() {
 	 		$(`.color-${[i]}-text`).text(`${color}`);	
 		 }
 	}
+	colors = []
 };
 
 function toggleLock(event) { 
@@ -29,3 +31,19 @@ function toggleLock(event) {
 function isLocked(i) { 
 	return $(`.color-${[i]}-section`).hasClass('locked')
 };
+
+function savePalette() {
+
+}
+
+function saveProject() {
+
+}
+
+function getProject() {
+
+}
+
+function getPalette() {
+
+}
