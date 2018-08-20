@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,10 +9,13 @@
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
+
 	<header>
 		<h1 class="main-header">Palette Picker</h1>
 	</header>
+
 	<main class="palette">
 		<section class='color-0-section'>
 			<h3 class="color-0-text"></h3>
@@ -33,15 +38,34 @@
 			<button class='lock-button'>lock</button>
 		</section>
 	</main>
-	<form> 
-		<select>
-			<option value="">--</option>
-		</select>
-		<input type="text" class="input-field">
-		<button>Save</button>
-	</form>
+
 	<hr>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<<script src="./js/scripts.js" type="text/javascript" charset="utf-8" async defer></script>
+
+	<form> 
+		<select class='project-dropdown'>
+			<option default>Select a project</option>
+		</select>
+		<input type="text" class="palette-input-field" placeholder="enter a name for this palette">
+		<button class="save-palette-button">Save Palette</button>
+	</form>
+
+	<form>
+		<p>Create new project</p>
+		<input type=text class="project-input-field" placeholder=" enter a name for your project">
+		<button class="save-project-button">Save Project</button>
+	</form>
+
+	<section class="projects-container">
+		<h1>Projects</h1>
+		<p class='projects-message'></p>
+		<section class='projects'>
+		</section>	
+	</section>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="jquery.min/jquery.min.js"><\/script>')</script>
+	<script src="./js/scripts.js" type="text/javascript" charset="utf-8" async defer></script>
+
 </body>
+
 </html>
