@@ -1,6 +1,6 @@
 
 exports.seed = function(knex, Promise) {
-  return knex('table_name').del()
+  return knex('palettes').del()
     .then(() => knex('projects').del())
     .then(() => {
       return Promise.all([
