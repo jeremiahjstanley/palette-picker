@@ -23,11 +23,37 @@ app.get('/api/v1/projects', (request, response) => {
 			response.status(200).json(projects)
 		})
 		.catch((error) => {
-			response.status(500).json({error})
+			response.status(500).json({ error })
 		})
 });
 
-app.get('api/v1/palettes/:id', (request, response) => {
+app.get('/api/v1/palettes', (request, response) => {
+	database('palettes').select()
+		.then((palettes) => {
+			response.status(200).json(palettes)
+		})
+		.catch((error) => {
+			response.status(500).json({ error })
+		})
+});
+
+app.get('/api/v1/projects/:id', (request, response) => {
+	const { id } = request.params;
+
+	database('projects').where('project_id', id).select()
+		.then(project => {
+			if(project.length) {
+				response.status(200).json(project)
+			} else {
+				response.status(404).send({error: `Unable to find project with id ${id}`})
+			}
+		})
+	.catch((error) => {
+		response.status(500).json({ error })
+	})
+});
+
+app.get('/api/v1/palettes/:id', (request, response) => {
 	const { id } = request.params;
 
 	database('palettes').where('project_id', id).select()
@@ -80,7 +106,7 @@ app.post('/api/v1/palettes', (request, response) => {
 		});
 });
 
-app.delete('/api/v1/palette/:id', (request, response) => {
+app.delete('/api/v1/palettes/:id', (request, response) => {
 	const { id } = request.params;
 
 	database('palettes').where('id', id).select()
@@ -91,6 +117,28 @@ app.delete('/api/v1/palette/:id', (request, response) => {
 				database('palettes').where('id', id).del()
 					.then(palette => {
 						response.status(204).send(`Resource ${palette} ${id} successfully deleted`)
+					})
+					.catch(error => {
+						response.status(500).json({ error })
+					})
+			}
+		})
+		.catch(error => {
+			response.status(500).json({ error })
+		})
+});
+
+app.delete('/api/v1/projects/:id', (request, response) => {
+	const { id } = request.params;
+
+	database('projects').where('id', id).select()
+		.then(project => {
+			if (!project.length) {
+				response.status(404).send({error: `Unable to find project with id ${id}`})
+			} else {
+				database('projects').where('id', id).del()
+					.then(project => {
+						response.status(204).send(`Resource ${project} ${id} successfully deleted`)
 					})
 					.catch(error => {
 						response.status(500).json({ error })

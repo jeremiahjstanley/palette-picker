@@ -19,7 +19,7 @@ exports.up = function(knex, Promise) {
   		table.integer('project_id').unsigned()
   		table.foreign('project_id').references('projects.id');
 
-  		table.timestamps(true, true)
+  		table.timestamps(true, true);
   	})
   ]);
 };
