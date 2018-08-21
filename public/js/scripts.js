@@ -1,5 +1,5 @@
 $(window).on('load', loadApplication);
-$('.palette').click(generatePalette);
+$('.main-palette').click(generatePalette);
 $('.lock-button').click(toggleLock);
 $('.save-palette-form').submit(savePalette);
 $('.save-project-form').submit(saveProject);
@@ -7,7 +7,7 @@ $('.projects').on('click', '.delete-project', deleteProject);
 $('.projects').on('click', '.delete-palette', deletePalette);
 $('.projects').on('click', '.palette', featurePalette);
 
-let colors = []
+let colors = [];
 
 function loadApplication() {
 	generatePalette();
@@ -19,7 +19,7 @@ function getRandomColor() {
   let color = '#';
   for (let i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
-  }
+  };
   return color;
 };
 
@@ -29,7 +29,7 @@ function generatePalette() {
 		 if (!isLocked(i)) {
 	 		$(`.color-${[i]}-section`).css('background-color', color);
 	 		$(`.color-${[i]}-text`).text(`${color}`);	
-		}
+		};
 	};
 };
 
@@ -80,22 +80,22 @@ function saveProject(event) {
 		$('.project-feedback-text').text('');
 	} else {
 		$('.project-feedback-text').text(`${projectName} is already in use, please enter a new name!`);
-	}
+	};
 };
 
 async function getProjects() {
 	const url = '/api/v1/projects';
 	const response = await fetch(url);
-	const projects = await response.json()
-	populateProjects(projects)
-	getPalettes()
+	const projects = await response.json();
+	populateProjects(projects);
+	getPalettes();
 };
 
 async function getPalettes() {
 	const url = '/api/v1/palettes';
 	const response = await fetch(url);
-	const palettes = await response.json()
-	palettes.forEach(palette => appendPalette(palette))
+	const palettes = await response.json();
+	palettes.forEach(palette => appendPalette(palette));
 };
 
 function populateProjects(projects) {
@@ -119,7 +119,7 @@ async function postProject(newProject) {
 	const id = project.id;
 	const name = newProject.project_name;
 	$('.project-dropdown').append(`<option value='${id}'>${name}</option>`);
-	appendProjects(id, name)
+	appendProjects(id, name);
 };
 
 async	function postPalette(id, name, colors) {
@@ -146,7 +146,7 @@ async	function postPalette(id, name, colors) {
 
 function deleteProject() {
 	$(this).siblings('.palette').each(function() {
-		deletePalette(this.id)
+		deletePalette(this.id);
 	});
 	const id = $(this).closest('.project').attr('id');
 	const url = `/api/v1/projects/${id}`;
@@ -181,7 +181,7 @@ function appendPalette(palette, id) {
 		if (project.id == palette.project_id) {
 			return project;
 		};
-	})
+	});
 	if (project) {
 		$('.palette-message').text('');
 		$(`<section class='palette' id='${palette.id || id.id}'>
