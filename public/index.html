@@ -16,7 +16,7 @@
 		<h1 class="main-header">Palette Picker</h1>
 	</header>
 
-	<main class="palette">
+	<main class="main-palette">
 		<section class='color-0-section'>
 			<h3 class="color-0-text"></h3>
 			<button class='lock-button'>lock</button>
@@ -42,8 +42,9 @@
 	<hr>
 
 	<form class="save-palette-form"> 
+		<h3>Save Current Palette</h3>
 		<select class='project-dropdown'>
-			<option value='' default>Select a project</option>
+			<option value='' default>Select a Project</option>
 		</select>
 		<input type="text" class="palette-input-field" placeholder="enter a name for this palette">
 		<button class="save-palette-button">Save Palette</button>
@@ -51,14 +52,14 @@
 	</form>
 
 	<form class="save-project-form">
-		<p>Create new project</p>
+		<h3>Create New Project</h3>
 		<input type=text class="project-input-field" placeholder=" enter a name for your project">
 		<button class="save-project-button">Save Project</button>
 		<p class='project-feedback-text'></p>
 	</form>
 
 	<section class="projects-container">
-		<h1>Projects</h1>
+		<h2>Projects</h2>
 		<p class='project-message'>You don't have any projects! Create some!</p>
 		<section class='projects'>
 		</section>	
