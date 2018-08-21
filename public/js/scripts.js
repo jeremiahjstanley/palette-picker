@@ -5,6 +5,7 @@ $('.save-palette-form').submit(savePalette);
 $('.save-project-form').submit(saveProject);
 $('.projects').on('click', '.delete-project', deleteProject);
 $('.projects').on('click', '.delete-palette', deletePalette);
+$('.projects').on('click', '.palette', featurePalette);
 
 let colors = []
 
@@ -42,7 +43,11 @@ function isLocked(i) {
 };
 
 function featurePalette() {
-
+	$(this).children('article').each(function(i) {
+		let color = $(this).attr('value');
+		$(`.color-${[i]}-section`).css('background-color', color);
+	 	$(`.color-${[i]}-text`).text(`${color}`);	
+	});
 };
 
 function savePalette(event) {
@@ -55,6 +60,7 @@ function savePalette(event) {
 	if (paletteName.length && projectId) {
 		postPalette(projectId, paletteName, colors);
 		$('.palette-input-field').val('');
+		$('.palette-feedback-text').text('');
 	} else {
 		$('.palette-feedback-text').text(`Please select a project!`);
 	};
@@ -81,8 +87,8 @@ async function getProjects() {
 	const url = '/api/v1/projects';
 	const response = await fetch(url);
 	const projects = await response.json()
-	getPalettes()
 	populateProjects(projects)
+	getPalettes()
 };
 
 async function getPalettes() {
@@ -135,7 +141,7 @@ async	function postPalette(id, name, colors) {
 		body: JSON.stringify(palette)
 	});
 	const results = await response.json();
-	appendPalette(palette, results)
+	appendPalette(palette, results);
 };
 
 function deleteProject() {
@@ -172,22 +178,22 @@ function appendProjects(id, name) {
 
 function appendPalette(palette, id) {
 	const project = $.find('.project').filter(project => {
-		if (project.id === palette.project_id) {
+		if (project.id == palette.project_id) {
 			return project;
 		};
 	})
 	if (project) {
 		$('.palette-message').text('');
-		$(`<section class='palette' id='${id.id ||palette.id}'>
+		$(`<section class='palette' id='${palette.id || id.id}'>
 				<h4>${palette.palette_name}</h4>
 				<button class='delete-palette'>X</button>
-				<article class='small-swatch' style='background-color:${palette.color_1}'></article>
-				<article class='small-swatch' style='background-color:${palette.color_2}'></article>
-				<article class='small-swatch' style='background-color:${palette.color_3}'></article>
-				<article class='small-swatch' style='background-color:${palette.color_4}'></article>
-				<article class='small-swatch' style='background-color:${palette.color_5}'></article>
+				<article class='small-swatch' style='background-color:${palette.color_1}' value='${palette.color_1}'></article>
+				<article class='small-swatch' style='background-color:${palette.color_2}' value='${palette.color_2}'></article>
+				<article class='small-swatch' style='background-color:${palette.color_3}' value='${palette.color_3}'></article>
+				<article class='small-swatch' style='background-color:${palette.color_4}' value='${palette.color_4}'></article>
+				<article class='small-swatch' style='background-color:${palette.color_5}' value='${palette.color_5}'></article>
 			</section>`).appendTo(project)
-	}
-}
+	};
+};
  
 
