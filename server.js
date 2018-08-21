@@ -40,7 +40,7 @@ app.get('/api/v1/palettes', (request, response) => {
 app.get('/api/v1/projects/:id', (request, response) => {
 	const { id } = request.params;
 
-	database('projects').where('project_id', id).select()
+	database('projects').where('id', id).select()
 		.then(project => {
 			if(project.length) {
 				response.status(200).json(project)
@@ -56,7 +56,7 @@ app.get('/api/v1/projects/:id', (request, response) => {
 app.get('/api/v1/palettes/:id', (request, response) => {
 	const { id } = request.params;
 
-	database('palettes').where('project_id', id).select()
+	database('palettes').where('id', id).select()
 		.then(palette => {
 			if(palette.length) {
 				response.status(200).json(palette)
