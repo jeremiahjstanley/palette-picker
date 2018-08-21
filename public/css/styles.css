@@ -1,36 +1,43 @@
 body {
- background-color: #000000;
- padding: 2rem;
- color: #FFFFFF;
+	background-color: #000000;
+	color: #FFFFFF;
+	font-family: Avenir;
+	padding: 2rem;
 }
 
 h1,
 h3 {
-	font-size: 2rem;
-	text-align: center;
-	font-family: Avenir;
 	color: #FFFFFF;
-	margin-bottom: 2rem;
+	font-size: 2rem;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-left: 4rem;
+	padding: 1rem;
 }
 
 h3 {
-	font-size: 1.5rem;
 	display: inline-block;
-	vertical-align: bottom;
+	font-size: 1.5rem;
 	mix-blend-mode: difference;
+	padding: 1rem;
+	vertical-align: bottom;
+}
+
+h4 {
+	padding: .75rem 1rem .75rem 2.5rem;
+}
+
+p {
+	padding: 1rem;
+	text-align: center;
 }
 
 button {
 	text-align: center;
-}
-
-.main-header { 
- 	font-size: 5rem;
- }
-
-.main-palette { 
-	height: 80vh;
-	display: flex;
 }
 
 section {
@@ -38,12 +45,117 @@ section {
 }
 
 form { 
-	padding: 3rem;
+	padding: 1rem;
 	text-align: center;
 }
 
-.small-swatch {
+input, select  {
+	font-size: .75rem;
+	padding: .5rem;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  border: solid 1px #FFFFFF;
+  width: 10rem;
+  margin: 0 1rem;
+}
+
+input {
+	width: 15rem;
+}
+
+input::placeholder {
+  color: #000000;
+  font-family: Avenir;
+  text-align: center;
+}
+
+option {
+	background-color: #FFFFFF;
+	color: #FFFFFF;
+}
+
+option::default {
+  color: #000000;
+}
+
+select {
+	height: 2rem;
+	border: solid 2px #FFFFFF;
+}
+
+button {
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  color: #000000;
+  padding: .5rem;
+}
+
+span {
+	width: 15rem;
+	overflow: scroll;
+}
+
+.main-header { 
+ 	font-size: 3.5rem;
+ }
+
+.main-palette { 
 	display: flex;
+	height: 50vh;
+	justify-content: center;
+}
+
+.lock-button {
+  background-image: url("css-resources/unlocked.png");
+  background-size: cover;
+  background-position: center;
+	margin: 2rem;
+	padding: 1rem;
+	border-radius: 20px;
+}
+
+.locked .lock-button {
+  background-image: url("css-resources/locked.png");
+}
+
+.form-header {
+	margin-left: 4rem;
+}
+
+.save-button {
+	width: 10rem;
+	font-size: .75rem;
+	margin: 0 1rem;
+}
+
+.delete-palette {
+	margin: .75rem 3rem;
+	padding: .3rem .5rem;
+	border-radius: 20px;
+}
+
+.palette {
+	display: flex;
+	margin-bottom: 2rem;
+}
+
+.small-swatch {
 	height: 3rem;
 	width: 3rem;
 }
+
+.project {
+	width: 70%;
+	margin: auto;
+	padding-bottom: 2rem;
+	margin-bottom: 2rem;
+	border: 1px solid #FFFFFF;
+}
+
+.delete-project {
+	float: right;
+	padding: .3rem .5rem;
+	margin: 1rem;
+	border-radius: 20px;
+}
+
