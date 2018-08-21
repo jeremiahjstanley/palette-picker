@@ -1,6 +1,7 @@
 body {
  background-color: #000000;
  padding: 2rem;
+ color: #FFFFFF;
 }
 
 h1,
@@ -39,4 +40,10 @@ section {
 form { 
 	padding: 3rem;
 	text-align: center;
+}
+
+.small-swatch {
+	display: flex;
+	height: 1rem;
+	width: 1rem;
 }
