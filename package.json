@@ -9,10 +9,17 @@
     "knex": "^0.15.2",
     "pg": "^7.4.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "eslint": "^5.4.0",
+    "eslint-plugin-react": "^7.11.1",
+    "mocha": "^5.2.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "eslint": "./node_modules/eslint/bin/eslint.js ./public/**/*.js"
   },
   "repository": {
     "type": "git",
