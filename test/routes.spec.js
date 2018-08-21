@@ -34,14 +34,14 @@ describe('API Endpoints', function() {
 
 	beforeEach(done => {
 		knex.migrate.rollback()
-			.then(() => knex.migrate.lastest())
+			.then(() => knex.migrate.latest())
 			.then(() => knex.seed.run())
 			.then(() => done())
 	});
 
   describe('GET /api/v1/projects', function() {
 
-    it('should return all the projects within the databse', (done) => {
+    it('should return all the projects within the database', (done) => {
     	chai.request(server)
     	.get('/api/v1/projects')
     	.end((err, res) => {
@@ -61,13 +61,13 @@ describe('API Endpoints', function() {
 
   describe('GET /api/v1/projects/:id', function() {
 
-	  it('should return a specific project from the databse', (done) => {
+	  it('should return a specific project from the database', (done) => {
 	    	chai.request(server)
 	    	.get('/api/v1/projects/1')
 	    	.end((err, res) => {
 	    		res.should.have.status(200);
 	    		res.should.json;
-	    		res.body.should.be.a('array') //object;
+	    		res.body.should.be.a('array');
 	    		res.body.should.have.length(1);
 	    		res.body[0].should.have.property('id');
 	    		res.body[0].id.should.equal(1);
@@ -107,7 +107,7 @@ describe('API Endpoints', function() {
 
     it('should not create a project with missing data', done => {
       chai.request(server)
-      .post('/api/v1/project')
+      .post('/api/v1/projects')
       .send({})
       .end((err, res) => {
         res.should.have.status(422);
@@ -119,21 +119,25 @@ describe('API Endpoints', function() {
 
   describe('DELETE /api/v1/projects/:id', function() {
 
-	  it('should delete a specific project from the databse', (done) => {
+	  it('should delete a specific project from the database', (done) => {
 	    	chai.request(server)
-	    	.get('/api/v1/projects/1')
+	    	.delete('/api/v1/palettes/1')
 	    	.end((err, res) => {
 	    		res.should.have.status(204);
-	    		res.should.json;
-	    		res.body.should.be.a('string');
-	    		res.body.should.equal('Resource: Mock Project 1, id: 1 successfully deleted');
+	    		res.body.should.be.a('object');
+	    	});
+	    	chai.request(server)
+	    	.delete('/api/v1/projects/1')
+	    	.end((err, res) => {
+	    		res.should.have.status(204);
+	    		res.body.should.be.a('object');
 	    		done()
 	    	});
 	    });
 
 		it('should return a 404 for a project that does not exist', (done) => {
 			chai.request(server)
-			.get('/api/v1/projects/2')
+			.delete('/api/v1/projects/2')
 			.end((err, res) => {
 				res.should.have.status(404);
         res.body.error.should.equal('Unable to find project with id: "2"');
@@ -144,7 +148,7 @@ describe('API Endpoints', function() {
 
   describe('GET /api/v1/palettes', function() {
 
-    it('should return all the palettes within the databse', (done) => {
+    it('should return all the palettes within the database', (done) => {
     	chai.request(server)
     	.get('/api/v1/palettes')
     	.end((err, res) => {
@@ -156,7 +160,7 @@ describe('API Endpoints', function() {
     		res.body[0].id.should.equal(1);
     		res.body[0].id.should.be.a('number');
     		res.body[0].should.have.property('palette_name');
-    		res.body[0].project_name.should.equal('Monochrome 1');
+    		res.body[0].palette_name.should.equal('Monochrome 1');
     		res.body[0].should.have.property('color_1');
     		res.body[0].color_1.should.equal('#1E1E1F');
     		res.body[0].should.have.property('color_2');
@@ -176,7 +180,7 @@ describe('API Endpoints', function() {
 
   describe('GET /api/v1/palettes/:id', function() {
 
-    it('should return all a specific palette from the databse', (done) => {
+    it('should return all a specific palette from the database', (done) => {
     	chai.request(server)
     	.get('/api/v1/palettes/1')
     	.end((err, res) => {
@@ -188,7 +192,7 @@ describe('API Endpoints', function() {
     		res.body[0].id.should.equal(1);
     		res.body[0].id.should.be.a('number');
     		res.body[0].should.have.property('palette_name');
-    		res.body[0].project_name.should.equal('Monochrome 1');
+    		res.body[0].palette_name.should.equal('Monochrome 1');
     		res.body[0].should.have.property('color_1');
     		res.body[0].color_1.should.equal('#1E1E1F');
     		res.body[0].should.have.property('color_2');
@@ -220,7 +224,7 @@ describe('API Endpoints', function() {
 
 		it('should create a new palette', (done) => {
 			chai.request(server)
-			.post('/api/v1/palette')
+			.post('/api/v1/palettes')
 			.send({
 				palette_name: 'Monochrome 2',
         color_1: '#1E1E1F',
@@ -242,7 +246,7 @@ describe('API Endpoints', function() {
 
     it('should not create a project with missing data', done => {
       chai.request(server)
-      .post('/api/v1/project')
+      .post('/api/v1/palettes')
       .send({
       	palette_name: 'Monochrome 2',
         color_1: '#1E1E1F',
@@ -261,21 +265,19 @@ describe('API Endpoints', function() {
 
   describe('DELETE /api/v1/palettes/:id', function() {
 
-	  it('should delete a specific palette from the databse', (done) => {
+	  it('should delete a specific palette from the database', (done) => {
 	    	chai.request(server)
-	    	.get('/api/v1/palette/1')
+	    	.delete('/api/v1/palettes/1')
 	    	.end((err, res) => {
 	    		res.should.have.status(204);
-	    		res.should.json;
-	    		res.body.should.be.a('string');
-	    		res.body.should.equal('Resource: Monochrome 1, id: 1 successfully deleted');
+	    		res.body.should.be.a('object');
 	    		done()
 	    	});
 	    });
 
 		it('should return a 404 for a palette that does not exist', (done) => {
 			chai.request(server)
-			.get('/api/v1/palette/2')
+			.delete('/api/v1/palettes/2')
 			.end((err, res) => {
 				res.should.have.status(404);
         res.body.error.should.equal('Unable to find palette with id: "2"');
