@@ -45,7 +45,7 @@ app.get('/api/v1/projects/:id', (request, response) => {
 			if(project.length) {
 				response.status(200).json(project)
 			} else {
-				response.status(404).send({error: `Unable to find project with id ${id}`})
+				response.status(404).send({error: `Unable to find project with id: "${id}"`})
 			}
 		})
 	.catch((error) => {
@@ -61,7 +61,7 @@ app.get('/api/v1/palettes/:id', (request, response) => {
 			if(palette.length) {
 				response.status(200).json(palette)
 			} else {
-				response.status(404).send({error: `Unable to find palette with id ${id}`})
+				response.status(404).send({error: `Unable to find palette with id: "${id}"`})
 			}
 		})
 	.catch((error) => {
@@ -112,11 +112,11 @@ app.delete('/api/v1/palettes/:id', (request, response) => {
 	database('palettes').where('id', id).select()
 		.then(palette => {
 			if (!palette.length) {
-				response.status(404).send({error: `Unable to find palette with id ${id}`})
+				response.status(404).send({error: `Unable to find palette with id: "${id}"`})
 			} else {
 				database('palettes').where('id', id).del()
 					.then(palette => {
-						response.status(204).send(`Resource ${palette} ${id} successfully deleted`)
+						response.status(204).send(`Resource: ${palette}, id: ${id} successfully deleted`)
 					})
 					.catch(error => {
 						response.status(500).json({ error })
@@ -134,11 +134,11 @@ app.delete('/api/v1/projects/:id', (request, response) => {
 	database('projects').where('id', id).select()
 		.then(project => {
 			if (!project.length) {
-				response.status(404).send({error: `Unable to find project with id ${id}`})
+				response.status(404).send({error: `Unable to find project with id: "${id}"`})
 			} else {
 				database('projects').where('id', id).del()
 					.then(project => {
-						response.status(204).send(`Resource ${project} ${id} successfully deleted`)
+						response.status(204).send(`Resource: ${project}, id: ${id} successfully deleted`)
 					})
 					.catch(error => {
 						response.status(500).json({ error })
@@ -154,3 +154,4 @@ app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });
 
+module.exports = app;
