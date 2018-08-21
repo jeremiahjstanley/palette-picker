@@ -144,9 +144,9 @@ async	function postPalette(id, name, colors) {
 	appendPalette(palette, results);
 };
 
-function deleteProject() {
+function deleteProject(event) {
 	$(this).siblings('.palette').each(function() {
-		deletePalette(this.id);
+		deletePalette(this.id, event);
 	});
 	const id = $(this).closest('.project').attr('id');
 	const url = `/api/v1/projects/${id}`;
@@ -156,7 +156,8 @@ function deleteProject() {
 	$(this).closest('.project').remove();
 };
 
-function deletePalette(altId) {
+function deletePalette(altId, event) {
+	event.stopPropagation(event);
 	const id = $(this).closest('.palette').attr('id') || altId;
 	const url = `/api/v1/palettes/${id}`;
 	const response = fetch(url, {
@@ -185,13 +186,15 @@ function appendPalette(palette, id) {
 	if (project) {
 		$('.palette-message').text('');
 		$(`<section class='palette' id='${palette.id || id.id}'>
+				<span>
 				<h4>${palette.palette_name}</h4>
-				<button class='delete-palette'>X</button>
+				</span>
 				<article class='small-swatch' style='background-color:${palette.color_1}' value='${palette.color_1}'></article>
 				<article class='small-swatch' style='background-color:${palette.color_2}' value='${palette.color_2}'></article>
 				<article class='small-swatch' style='background-color:${palette.color_3}' value='${palette.color_3}'></article>
 				<article class='small-swatch' style='background-color:${palette.color_4}' value='${palette.color_4}'></article>
 				<article class='small-swatch' style='background-color:${palette.color_5}' value='${palette.color_5}'></article>
+				<button class='delete-palette'>X</button>
 			</section>`).appendTo(project)
 	};
 };
