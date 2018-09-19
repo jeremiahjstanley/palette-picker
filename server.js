@@ -150,8 +150,11 @@ app.delete('/api/v1/projects/:id', (request, response) => {
 		})
 });
 
-app.listen(app.get('port'), () => {
-  console.log(`${app.locals.title} is running on ${app.get('port')}.`);
+module.exports = app;
+app.listen(app.get("port"), () => {
+	/* eslint-disable no-console */
+	console.log(`${app.locals.title} is running on ${app.get("port")}.`);
+	/* eslint-enable no-console */
 });
 
 module.exports = app;
