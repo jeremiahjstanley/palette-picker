@@ -15,15 +15,15 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
-    "eslint": "^5.4.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
     "mocha": "^5.2.0"
   },
   "scripts": {
     "test": "NODE_ENV=test mocha --exit",
     "start": "node server.js",
-    "eslint": "./node_modules/eslint/bin/eslint.js ./public/**/*.js"
+    "eslint": "./node_modules/eslint/bin/eslint.js *.js --ignore-pattern *.test.js"
   },
   "repository": {
     "type": "git",
